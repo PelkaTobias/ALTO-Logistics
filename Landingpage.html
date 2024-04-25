@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landingpage</title>
+</head>
+
+<body>
+    <h1>Willkommen auf der Landingpage</h1>
+    <p>Hallo <span id="username"></span>, Sie sind jetzt angemeldet!</p>
+
+    <!-- Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"></script>
+
+    <script type="module">
+        // Firebase-Konfiguration (ersetzen Sie dies durch Ihre eigenen Firebase-Konfigurationsdaten)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6XsQmF0tgiP--SwRsN4Fhoyrv1c6ZUkE",
+            authDomain: "alto-logistics-alto.firebaseapp.com",
+            databaseURL: "https://alto-logistics-alto-default-rtdb.firebaseio.com",
+            projectId: "alto-logistics-alto",
+            storageBucket: "alto-logistics-alto.appspot.com",
+            messagingSenderId: "882170958574",
+            appId: "1:882170958574:web:1dbd10b23dd601202819ff",
+            measurementId: "G-ZCSRPLEQKL"
+        };
+
+        // Initialisieren der Firebase-App
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        // Überprüfen, ob ein Benutzer angemeldet ist
+        auth.onAuthStateChanged(function (user) {
+            if (user) {
+                // Benutzer ist angemeldet
+                const usernameElement = document.getElementById('username');
+
+                // Pfad zum Benutzernamen in der Datenbank
+                const userRef = ref(database, 'users/' + user.uid + '/username');
+
+                // Daten aus der Datenbank abrufen
+                get(userRef).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        usernameElement.textContent = snapshot.val();
+                    } else {
+                        console.log("Benutzername nicht gefunden");
+                    }
+                }).catch((error) => {
+                    console.error("Fehler beim Abrufen des Benutzernamens: ", error);
+                });
+            } else {
+                // Benutzer ist nicht angemeldet, Weiterleitung zur Anmeldeseite
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+
+</html>
