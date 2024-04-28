@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produktliste</title>
+   </head>
+<body>
+    <div>
+        <h1>Produktliste</h1>
+        <div id="productList"></div>
+
+        <!-- Hier wird das Bearbeitungsformular eingefügt -->
+        <form id="editForm">
+            <h2>Produkt bearbeiten</h2>
+            <label for="editProductName">Produktname:</label>
+            <input type="text" id="editProductName" required><br><br>
+            
+            <label for="editLength">Länge:</label>
+            <input type="text" id="editLength" required><br><br>
+            
+            <label for="editWidth">Breite:</label>
+            <input type="text" id="editWidth" required><br><br>
+            
+            <label for="editHeight">Höhe:</label>
+            <input type="text" id="editHeight" required><br><br>
+            
+            <label for="editWeight">Gewicht:</label>
+            <input type="text" id="editWeight" required><br><br>
+            
+            <button type="submit" id="saveEditButton">Speichern</button>
+        </form>
+
+        <script type="module" src="inventory.js"></script>
+        
+    </div>
+</body>
+</html>

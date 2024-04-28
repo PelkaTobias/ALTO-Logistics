@@ -1,0 +1,279 @@
+body {
+    display: relative;
+    min-height: 100vh;
+    background: url("../1. Bilder/FullLogo_Transparent (1).png") no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+    background-size: 80%;
+    background-attachment: fixed; /* Hintergrund fixieren */
+    background-position-x: center; /* Horizontal zentriert */
+    background-position-y: calc(100% - 70%); /* 50 Pixel von unten */
+}
+
+
+@keyframes lavaLamp {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+header {
+    background: linear-gradient(to right, #ff3333, #d8807f);
+    background-size: 200% 100%;
+    color: white;
+    width: 100%;
+    height: 10vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    animation: lavaLamp 6s ease infinite; /* Ändern der Dauer der Animation für einen flüssigen Effekt */
+}
+
+header span {
+    position: absolute; /* Position festlegen */
+    top: 20px; /* Abstand von oben */
+    left: 20px; /* Abstand von links */
+    margin: 0; /* Außenabstand zurücksetzen */
+    font-size: 1em; /* Standard-Schriftgröße */
+}
+header span {
+    font-size: 50px; /* Große Schriftgröße */
+    font-weight: bold;
+}
+
+
+/* Hier kommt der restliche CSS-Code für deine Seite */
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Transparenter Hintergrund */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9990;
+}
+
+
+.popup1,
+.popup2 {
+    position: absolute;
+    top: 50%; /* Startposition in der Mitte */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Zentrierung des Popups */
+    width: 70vw;
+    height: 70vh;
+    max-width: 80%; /* Maximal 80% der Bildschirmbreite */
+    padding: 20px;
+    border: 5px solid #000;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Schatten */
+    overflow-y: auto;
+    padding-right: 15px; /* Platz für Scrollbalken */
+    z-index: 9999;
+    opacity: 0; /* Starte mit 0% Deckkraft */
+    transition: opacity 230ms ease-in-out; /* Übergangseffekt für die Deckkraft */
+}
+
+.overlay.active .popup1,
+.overlay.active .popup2 {
+    opacity: 1; /* Ändere die Deckkraft auf 100%, wenn aktiv */
+}
+
+#closeOverlayButton1,
+#closeOverlayButton2 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.popup::-webkit-scrollbar {
+    width: 10px;
+}
+
+.popup::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.popup::-webkit-scrollbar-thumb {
+    background: rgb(139, 139, 139);
+}
+
+
+
+
+
+#openPopupButton {
+    position: absolute;
+    top: 500px;
+    left: 20px;
+    width: 300px;
+    height: 50px;
+    background-color: #b12222; /* Hintergrundfarbe */
+    color: white; /* Textfarbe */
+    border: none; /* Kein Rahmen */
+    padding: 10px 20px; /* Innenabstand */
+    border-radius: 5px; /* Abgerundete Ecken */
+    border: 2px solid black;
+    cursor: pointer; /* Zeiger-Cursor */
+    text-align: left;
+    color: rgb(0, 0, 0);
+    font-size: 16px; /* Textgröße */
+    font-weight: bold; /* Fetter Text */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif; /* Andere Schriftart */
+}
+
+#openPopupButton:hover {
+    background-color: rgb(100, 163, 58); /* Farbe beim Hovern */
+}
+#showproducts {
+    position: absolute;
+    top: 560px;
+    width: 300px;
+    left: 20px;
+    height: 100px;
+    background-color: #b12222; /* Hintergrundfarbe */
+    color: white; /* Textfarbe */
+    border: none; /* Kein Rahmen */
+    padding: 10px 20px; /* Innenabstand */
+    border-radius: 5px; /* Abgerundete Ecken */
+    border: 2px solid black;
+    cursor: pointer; /* Zeiger-Cursor */
+    text-align: left;
+    color: rgb(0, 0, 0);
+    font-size: 24px; /* Textgröße */
+    font-weight: bold; /* Fetter Text */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif; /* Andere Schriftart */
+}
+
+#showproducts:hover {
+    background-color: rgb(100, 163, 58);; /* Farbe beim Hovern */
+}
+
+#warenankündigung {
+    position: absolute;
+    top: 670px;
+    width: 300px;
+    height: 100px;
+    left: 20px;
+    background-color: #b12222; /* Hintergrundfarbe */
+    color: white; /* Textfarbe */
+    border: none; /* Kein Rahmen */
+    padding: 10px 20px; /* Innenabstand */
+    border-radius: 5px; /* Abgerundete Ecken */
+    border: 2px solid black;
+    cursor: pointer; /* Zeiger-Cursor */
+    text-align: left;
+    color: rgb(0, 0, 0);
+    font-size: 24px; /* Textgröße */
+    font-weight: bold; /* Fetter Text */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif; /* Andere Schriftart */
+}
+
+#warenankündigung:hover {
+    background-color: rgb(100, 163, 58);; /* Farbe beim Hovern */
+}
+#etikettenupload {
+    position: absolute;
+    top: 780px;
+    left: 20px;
+    width: 300px;
+    height: 100px;
+    background-color: #b12222; /* Hintergrundfarbe */
+    color: white; /* Textfarbe */
+    border: none; /* Kein Rahmen */
+    padding: 10px 20px; /* Innenabstand */
+    border-radius: 5px; /* Abgerundete Ecken */
+    border: 2px solid black;
+    cursor: pointer; /* Zeiger-Cursor */
+    text-align: left;
+    color: rgb(0, 0, 0);
+    font-size: 24px; /* Textgröße */
+    font-weight: bold; /* Fetter Text */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif; /* Andere Schriftart */
+}
+
+#etikettenupload:hover {
+    background-color: rgb(100, 163, 58); /* Farbe beim Hovern */
+}
+
+
+.profile {
+    position: fixed;
+    top: 25px;
+    right: 50px;
+}
+
+.profile button {
+    
+    background-color: #ff333300; /* Schönes Rot */
+    border: none; /* Kein Rand */
+    color: white; /* Textfarbe */
+    padding: 10px 20px; /* Innenabstand */
+    text-align: center; /* Text zentrieren */
+    text-decoration: none; /* Keine Unterstreichung */
+    display: inline-block; /* Inline-Block-Element */
+    font-size: 24px; /* Textgröße */
+    border-radius: 5px; /* Abgerundete Ecken */
+    cursor: pointer; /* Zeiger-Cursor */
+    position: relative;
+    font-weight: bold;
+}
+
+.profile button:hover {
+    animation: shake 1s infinite; /* Wackelanimation beim Hovern */
+}
+
+@keyframes shake {
+    0% { transform: translateX(3); } /* Keine Verschiebung */
+    25% { transform: translateX(-3px); } /* Nach links verschieben */
+    50% { transform: translateX(3px); } /* Nach rechts verschieben */
+    75% { transform: translateX(-3px); } /* Wieder nach links verschieben */
+    100% { transform: translateX(3); } /* Zurück zur Ausgangsposition */
+}
+
+
+.chatOverlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Transparenter Hintergrund */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9990;
+}
+.chatPopup {
+    
+    background-color: #ff333300; /* Schönes Rot */
+    border: none; /* Kein Rand */
+    color: white; /* Textfarbe */
+    padding: 10px 20px; /* Innenabstand */
+    text-align: center; /* Text zentrieren */
+    text-decoration: none; /* Keine Unterstreichung */
+    display: inline-block; /* Inline-Block-Element */
+    font-size: 24px; /* Textgröße */
+    border-radius: 5px; /* Abgerundete Ecken */
+    cursor: pointer; /* Zeiger-Cursor */
+    position: relative;
+    font-weight: bold;
+}
+#chatButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}

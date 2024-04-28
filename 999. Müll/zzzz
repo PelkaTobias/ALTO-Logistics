@@ -1,0 +1,10 @@
+const firebaseConfig = {
+    apiKey: "AIzaSyC6XsQmF0tgiP--SwRsN4Fhoyrv1c6ZUkE",
+    authDomain: "alto-logistics-alto.firebaseapp.com",
+    databaseURL: "https://alto-logistics-products.firebaseio.com/",
+    projectId: "alto-logistics-alto",
+    storageBucket: "alto-logistics-alto.appspot.com",
+    messagingSenderId: "882170958574",
+    appId: "1:882170958574:web:1dbd10b23dd601202819ff",
+    measurementId: "G-ZCSRPLEQKL"
+}
