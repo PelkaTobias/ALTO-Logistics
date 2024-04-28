@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt</title>
+    <link rel="stylesheet" href="Kontakt.css">
+    <!-- Weitere Stylesheets einbinden, falls erforderlich -->
+</head>
+
+<body>
+    <a href="../index.html" class="logo">
+        <img src="../1. Bilder/FullLogo_Transparent (1).png" alt="">
+    </a>
+    <header class="header2">
+        <h2 class="logo"><red></h2>
+            <nav class="navigaton">
+                <a href="../index.html">Home</a>
+                <a href="ÜberUns.html">Über Uns</a>
+                <a href="Services.html">Services</a>
+    
+                <a href="Kontakt.html">Kontakt</a>
+    
+                <button class="btnLogin-popup">Login</button>
+            </nav>
+    </header>
+    <header1>
+        <h1>Kontaktformular
+        </h1>
+    </header>
+
+    <main>
+
+        <section>
+            <div class="heading">
+                <p>Firma: ALTO-Logistics</p>
+                <p>Adresse: Henrik-Ibsen-Straße 11, 18106 Rostock</p>
+                <p>Telefon: +49 1732187121</p>
+                <p>E-Mail: info@alto-logistics.de</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <form action="https://form.taxi/s/bzxunq70" method="POST">
+                    <!-- Meldung, die nur bei erfolgreicher Übermittlung angezeigt wird -->
+                    <div class="alert" id="successMessage" style="display: none;">Ihre Anfrage wurde übermittelt.</div>
+                        
+                    <div class="inputBox">
+                        <input type="text" id="name" placeholder="Ihr Name...." required name="Name">
+                    </div>
+                    
+                    <div class="inputBox">
+                        <input type="email" id="emailid" placeholder="Ihre E-Mail....." required name="Email">
+                    </div>
+                    
+                    <div class="inputBox" class="inputbox-text">
+                        <textarea id="msgContent" cols="30" rows="10" placeholder="Nachricht" required name="Nachricht"></textarea>
+                    </div>
+                    
+                    <div class="inputBox">
+                        <button type="submit" id="submitButton">Senden</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ALTO-Logistics. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <!-- Weitere Skripte einbinden, falls erforderlich -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="scripts/test.js"></script>
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Standardverhalten des Formulars unterbrechen
+
+            // Daten aus dem Formular extrahieren
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("emailid").value;
+            const message = document.getElementById("msgContent").value;
+
+            // HTML in Text umwandeln
+            const textMessage = `Name: ${name}\nE-Mail: ${email}\nNachricht: ${message}`;
+
+            // Hier sollte deine Logik für die Datenübermittlung stehen
+            // In diesem Beispiel wird nur die Erfolgsmeldung angezeigt
+            document.getElementById("successMessage").style.display = "block";
+
+            // Nach 3 Sekunden die Erfolgsmeldung ausblenden
+            setTimeout(function () {
+                document.getElementById("successMessage").style.display = "none";
+            }, 3000);
+        });
+    </script>
+    
+    
+
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="loginregisterfield.css">
+</head>
+<body>
+    
+    <header>
+        <h2 class="logo"><red></h2>
+        <nav class="navigaton">
+           
+           
+            <button class="btnLogin-popup">Login</button>
+        </nav>
+
+    </header>
+
+    <div class="wrapper">
+        <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+        <div class="form-box login">
+            <h2>Login</h2>
+
+            <form action="#">
+
+
+                <div class="inputbox">
+                    <span class="icon">
+                        <ion-icon name="mail"></ion-icon>
+                    </span>
+                    <input type="email" value="" id="email-login" required>
+                    <label>Email</label>
+                </div>
+
+
+                <div class="inputbox">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="password" value="" id="password-login" required>
+                    <label>Passwort</label>
+                </div>
+
+
+                <div class="remember-forgot">
+                    <label><input type="checkbox"
+                        >Erinnern</label>
+                        <a href="#">Passwort vergessen?</a>
+                </div>
+
+
+                <button type="submit" class="btn" id="submit-login">Login</button>
+                <div class="login-register">
+                    <p>Keinen Account?<a 
+                    href="#" 
+                    class="register-link"> Registrieren</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registrierung</h2>
+            <form action="#">
+
+
+                <div class="inputbox">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="text" value="" id="username" required>
+                    <label>Benutzername</label>
+                </div>
+
+
+                <div class="inputbox">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="text" value="" id="email" required>
+                    <label>Email</label>
+                </div>
+
+
+                <div class="inputbox">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="text" value="" id="phone" required>
+                    <label>Telefonnummer</label>
+                </div>
+
+                <div class="inputbox">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="password" value="" id="password" required>
+                    <label>Passwort</label>
+                </div>
+
+                <div class="remember-forgot">
+                    <label><input type="checkbox"
+                        > Ich akzeptiere die AGBs.</label>
+                </div>
+
+                <input type="submit" value="Registrieren" class="btn" id="submit-register">
+
+                <div class="login-register">
+                    <p>Bereits einen Account?<a 
+                    href="#" 
+                    class="login-link"> Login</a></p>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="index.js"></script>
+    <script src="login.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+    
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6XsQmF0tgiP--SwRsN4Fhoyrv1c6ZUkE",
+            authDomain: "alto-logistics-alto.firebaseapp.com",
+            databaseURL: "https://alto-logistics-alto-default-rtdb.firebaseio.com",
+            projectId: "alto-logistics-alto",
+            storageBucket: "alto-logistics-alto.appspot.com",
+            messagingSenderId: "882170958574",
+            appId: "1:882170958574:web:1dbd10b23dd601202819ff",
+            measurementId: "G-ZCSRPLEQKL"
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app); // Initialize Realtime Database
+    
+        const submit = document.getElementById("submit-register");
+        submit.addEventListener("click", function(event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const username = document.getElementById("username").value;
+            const phone = document.getElementById("phone").value;
+    
+            createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Erfolgreich registriert
+                const user = userCredential.user;
+                
+                // Benutzerdaten in Firebase Realtime Database speichern
+                const userRef = ref(database, 'users/' + user.uid);
+                set(userRef, {
+                    username: username,
+                    email: email,
+                    phone: phone
+                })
+                .then(() => {
+                    alert("Sie wurden erfolgreich registriert und Ihre Daten wurden in der Datenbank gespeichert!");
+                })
+                .catch((error) => {
+                    console.error("Fehler beim Speichern der Benutzerdaten in der Datenbank: ", error);
+                    alert("Registrierung erfolgreich, aber Fehler beim Speichern der Benutzerdaten.");
+                });
+                
+                // Weitere Aktionen nach der erfolgreichen Registrierung
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert("Registrierung fehlgeschlagen.");
+            });
+        });
+    
+        const submitLogin = document.getElementById("submit-login");
+        submitLogin.addEventListener("click", function(event) {
+            event.preventDefault();
+            const email = document.getElementById("email-login").value;
+            const password = document.getElementById("password-login").value;
+    
+            signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                window.location.href = "../Dashboard.html"
+                // Weitere Aktionen nach dem erfolgreichen Login
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert("Email-Adresse oder Passwort falsch.");
+            });
+        });
+    </script>
+
+</body>
+</html>

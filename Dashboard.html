@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="fonts.css">
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="1. Bilder/FullLogo_Transparent (1).png">
+                    <h2>ALTO<span class="danger">Logistics</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons">
+                        close
+                        </span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="#">
+                    <span class="material-icons">
+                        dashboard
+                        </span>
+                        <h3>Dashboard</h3>
+                </a>
+
+                <a href="4. Chat/kommunikation.html">
+                    <span class="material-icons">
+                        question_answer
+                        </span>
+                        <h3>Nachrichten</h3>
+                        <span class="message count"></span>
+                </a>
+                
+                <a href="#">
+                    <span class="material-icons">
+                        inventory
+                        </span>
+                        <h3>Lager einsehen</h3>
+                </a>
+
+                <a href="#">
+                    <span class="material-icons">
+                        local_shipping
+                        </span>
+                        <h3>Lieferung ankündigen</h3>
+                </a>
+
+                <a href="#">
+                    <span class="material-icons">
+                        file_upload
+                        </span>
+                        <h3>Dateien hochladen</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons">
+                        add
+                        </span>
+                        <h3>Produkt hinzufügen</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons">
+                        settings
+                        </span>
+                        <h3>Einstellungen</h3>
+                </a>
+                
+                <a href="#">
+                    <span class="material-icons">
+                        logout
+                        </span>
+                        <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+
+        <!-------END OF ASIDE------>
+        <main>
+            <h1>Dashboard</h1>
+            
+            <div class="date">
+                <input type="date">
+            </div>
+
+            <div class="insights">
+                <div class="income">
+                    <span class="material-icons">
+                        payments
+                        </span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Umsatz</h3>
+                                <h1>€25,034</h1>
+                            </div>
+                            <div class="progress">
+                                <svg>
+                                    <circle cx="38" cy="38" r="36"></circle>
+                                </svg>
+                                <div class="number">
+                                   <p>80%</p>
+                                </div>
+                            </div>
+                        </div>
+                        <small class="text-muted">Heute</small>
+                </div>
+<!-------END OF UMSATZ------>
+                <div class="income-month">
+                    <span class="material-icons">
+                        savings
+                        </span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Umsatz</h3>
+                                <h1>€25,024</h1>
+                            </div>
+                            <div class="progress">
+                                <svg>
+                                    <circle cx="38" cy="38" r="36"></circle>
+                                </svg>
+                                <div class="number">
+                                   <p>80%</p>
+                                </div>
+                            </div>
+                        </div>
+                        <small class="text-muted">Diesen Monat</small>
+                </div>
+<!-------END OF UMSATZ-MONAT------>
+                <div class="costs">
+                    <span class="material-icons">
+                        request_quote
+                        </span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Kosten</h3>
+                                <h1>€25k</h1>
+                            </div>
+                            <div class="progress">
+                                <svg>
+                                    <circle cx="38" cy="38" r="36"></circle>
+                                </svg>
+                                <div class="number">
+                                   <p>12%</p>
+                                </div>
+                            </div>
+                        </div>
+                        <small class="text-muted">Diesen Monat</small>
+                </div>
+<!-------END OF COSTS------>
+            </div>
+<!-------END OF INSIGHTS------>
+            <div class="Lagerbestand">
+                <h2>Lagerbestand</h2>
+                <table>
+                    <thead>
+                        <th onclick="sortTable(0)">Produkt<span class="material-icons">swap_vert</span></th>
+                <th onclick="sortTable(1)">Produktnummer<span class="material-icons">swap_vert</span></th>
+                <th onclick="sortTable(2)">Versand<span class="material-icons">swap_vert</span></th>
+                <th onclick="sortTable(3)">Bestand<span class="material-icons">swap_vert</span></th>
+                <th onclick="sortTable(4)">Heute<span class="material-icons">swap_vert</span></th>
+                <th onclick="sortTable(5)">30 Tage<span class="material-icons">swap_vert</span></th>
+                <th></th>
+                    </thead>
+                    <tbody>
+          
+                </table>
+                <a href="#">Mehr ansehen</a>
+            </div>
+        </main>
+        <!-------END OF MAIN------>
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons">
+                        menu
+                        </span>
+                </button>
+                <div class="theme-toggler" id="theme-toggler">
+                    <span class="material-icons" id="light-mode">
+                        light_mode
+                        </span>
+                    <span class="material-icons">
+                        dark_mode
+                        </span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>Alex</b></p>
+                        <small class="text-muted">Gold-Kunde</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="1. Bilder/b22faa4b-b108-4700-8ecc-3329442c6e53.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- END OF TOP -->
+                <div class="recent-updates">
+                    <h2>Neuigkeiten</h2>
+                    <div class="updates">
+                            <div class="update">
+                                <div class="profile-photo">
+                                    <img src="1. Bilder/879e84e2-dd70-471d-a4c1-5eac6d5fcae3.jpg">
+                                </div>
+                                <div class="message">
+                                    <p><b>ALTO-Alex:</b>was bleibt ist der Schmerz!</p>
+                                    <small class="text-muted">vor 12 Minuten</small>
+                                </div>
+                        </div>
+                            <div class="update">
+                                <div class="profile-photo">
+                                    <img src="1. Bilder/879e84e2-dd70-471d-a4c1-5eac6d5fcae3.jpg">
+                                </div>
+                                <div class="message">
+                                    <p><b>ALTO-Alex:</b> Schmerz vergeht,</p>
+                                    <small class="text-muted">vor 13 Minuten</small>
+                                </div>
+                        </div>
+                            <div class="update">
+                                <div class="profile-photo">
+                                    <img src="1. Bilder/879e84e2-dd70-471d-a4c1-5eac6d5fcae3.jpg">
+                                </div>
+                                <div class="message">
+                                    <p><b>ALTO-Alex:</b> Hört auf David zu nerven!</p>
+                                    <small class="text-muted">vor 30 Minuten</small>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            <!-------------------END OF RECENT UpDATES-------->
+                <div class="sales-analytics">
+                    <h2>Verkäufe</h2>
+                    <div class="item FBA">
+                        <div class="icon">
+                        <span class="material-icons">
+                            shopping_cart
+                            </span>
+                        </div>
+                        <div class="right">
+                            <div class="info">
+                                <h3>FBA BESTELLUNGEN</h3>
+                                <small class="text-muted">letzte 24h</small>
+                            </div>
+                            <h5 class="success">+39%</h5>
+                            <h3>3849</h3>
+                        </div>
+                    </div>
+                    <div class="item FBM">
+                        <div class="icon">
+                        <span class="material-icons">
+                            store
+                            </span>
+                    </div>
+                        <div class="right">
+                        <div class="info">
+                            <h3>FBM BESTELLUNGEN</h3>
+                            <small class="text-muted">letzte 24h</small>
+                        </div>
+                            <h5 class="danger">-17%</h5>
+                            <h3>42</h3>
+                        </div>
+                        </div>
+                        <div class="item add-product">
+                            <div>
+                                <span class="material-icons">
+                                add
+                                </span>
+                            <h3>Produkt hinzufügen</h3>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <script src="Dashboard.js" type="module"></script>
+
+    <script src="Dashboard.js"></script>
+    <script>
+        // Beispiel-Daten
+        
+    
+        // Tabelle initial füllen
+        fillTable(Lagerbestand);
+    
+        function fillTable(data) {
+            const tbody = document.querySelector(".Lagerbestand table tbody");
+            tbody.innerHTML = ""; // Leere die Tabelle zuerst
+    
+            data.forEach(item => {
+                const tr = document.createElement("tr");
+                Object.values(item).forEach(value => {
+                    const td = document.createElement("td");
+                    td.textContent = value;
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+        }
+    
+        function sortTable(columnIndex) {
+            const table = document.querySelector(".Lagerbestand table");
+            const tbody = table.querySelector("tbody");
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+    
+            // Sortiere die Zeilen basierend auf den Werten in der ausgewählten Spalte
+            rows.sort((rowA, rowB) => {
+                const cellA = rowA.cells[columnIndex].textContent.trim();
+                const cellB = rowB.cells[columnIndex].textContent.trim();
+                return cellA.localeCompare(cellB, undefined, { numeric: true });
+            });
+    
+            // Umgekehrte Sortierung, wenn bereits nach dieser Spalte sortiert wurde
+            if (table.dataset.sortedColumn === columnIndex.toString()) {
+                rows.reverse();
+                table.dataset.sortedColumn = ""; // Zurücksetzen der Sortierinformation
+            } else {
+                table.dataset.sortedColumn = columnIndex.toString();
+            }
+    
+            // Zeilen neu anordnen
+            tbody.innerHTML = "";
+            rows.forEach(row => tbody.appendChild(row));
+        }
+    </script>
+</body>
+</html>

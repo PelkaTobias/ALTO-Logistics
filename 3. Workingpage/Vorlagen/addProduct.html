@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produkte</title>
+    
+    <!-- Firebase JavaScript SDK -->
+    
+</head>
+<body>
+    <h1>Neues Produkt erstellen</h1>
+    <form id="productForm">
+        <label for="productName"></label>
+        <input type="text" id="productName" required autocomplete="off" placeholder="Produktname"><br><br>
+        
+        <label for="length"></label>
+        <input type="text" id="length" required autocomplete="off" oninput="validateInput(this)" placeholder="Länge"><br><br>
+        
+        <label for="width"></label>
+        <input type="text" id="width" required autocomplete="off" oninput="validateInput(this)" placeholder="Breite"><br><br>
+        
+        <label for="height"></label>
+        <input type="text" id="height" required autocomplete="off" oninput="validateInput(this)" placeholder="Höhe"><br><br>
+        
+        <label for="weight"></label>
+        <input type="text" id="weight" required autocomplete="off" oninput="validateInput(this)" placeholder="Gewicht"><br><br>
+     
+        <button type="btn" value="Speichern" class="btn" id="submit">Speichern</button>
+    </form>
+
+    <script type="module" src="addProduct/addProduct.js"></script>
+    <script src="addProduct/addProduct.js"></script>
+    <script>
+        function validateInput(input) {
+            input.value = input.value.replace(/[^0-9.,]/g, ''); // Nur Zahlen, Komma und Punkt erlauben
+        }
+    </script>
+</body>
+</html>
