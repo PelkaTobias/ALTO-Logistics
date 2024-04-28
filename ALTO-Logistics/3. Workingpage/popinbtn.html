@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="popinbtn.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300i" rel="stylesheet">
+    <style>
+        /* Hier deine CSS-Stile */
+        .overlay {
+            display: none; /* Standardmäßig ausblenden */
+        }
+
+        /* Chat-Button-Stile */
+        #chatButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+   
+    
+        <button id="openPopupButton">Neues Produkt anlegen</button>
+        
+    
+    <header>
+        
+        <div class="lava-lamp"></div>
+        <!-- Hier kommt dein Header-Inhalt -->
+    </header>
+    
+    
+        
+
+        <div id="overlay" class="overlay">
+            <div id="popup1" class="popup1">
+                <!-- Inhalt des Pop-up-Fensters -->
+
+                <h1>Neues Produkt erstellen</h1>
+                <form id="productForm">
+                    <label for="productName"></label>
+                    <input type="text" id="productName" required autocomplete="off" placeholder="Produktname"><br><br>
+                    
+                    <label for="length"></label>
+                    <input type="text" id="length" required autocomplete="off" oninput="validateInput(this)" placeholder="Länge"><br><br>
+                    
+                    <label for="width"></label>
+                    <input type="text" id="width" required autocomplete="off" oninput="validateInput(this)" placeholder="Breite"><br><br>
+                    
+                    <label for="height"></label>
+                    <input type="text" id="height" required autocomplete="off" oninput="validateInput(this)" placeholder="Höhe"><br><br>
+                    
+                    <label for="weight"></label>
+                    <input type="text" id="weight" required autocomplete="off" oninput="validateInput(this)" placeholder="Gewicht"><br><br>
+                    
+              
+                    <button type="btn" value="Speichern" class="btn" id="submit">Speichern</button>
+                    <button id="closeOverlayButton1" style="position: fixed; top: 10px; right: 10px;">X</button>
+                </form>
+                
+
+                <script type="module" src="addProduct.js"></script>
+                <script>
+                    function validateInput(input) {
+                        input.value = input.value.replace(/[^0-9.,]/g, ''); // Nur Zahlen, Komma und Punkt erlauben
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button id="showproducts">Ware verwalten</button>
+    
+        <div id="overlay2" class="overlay2 overlay"> <!-- overlay-Klasse hinzugefügt -->
+            <div id="popup1" class="popup1">
+                <!-- Inhalt des Pop-up-Fensters -->
+                
+                <div id="overlaywarenlager" class="overlaywarenlager">
+                <h1>Produkte</h1>
+                
+                <div id="productList"></div>
+    
+                <script type="module" src="inventory.js"></script>
+                <script type="module" src="addProduct.js"></script>
+                <button id="closeOverlayButton2" style="position: fixed; top: 10px; right: 10px;">X</button>
+                <script>
+                    
+                    function validateInput(input) {
+                        input.value = input.value.replace(/[^0-9.,]/g, ''); // Nur Zahlen, Komma und Punkt erlauben
+                    }
+                </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div><button id="warenankündigung">Ware ankündigen</button>
+    </div>
+
+    <div><button id="etikettenupload">Etiketten hochladen</button>
+    </div>
+
+    <!-- Chat-Button -->
+    <button id="chatButton">Chat</button>
+
+    <!-- HIER BEGINNT DER EINGEFÜGTE TEIL -->
+
+    <div class="profile" id="profile">
+        <button><span id="username"></span></button>
+    </div>
+    <!-- Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"></script>
+
+    <script type="module">
+        // Firebase-Konfiguration (ersetzen Sie dies durch Ihre eigenen Firebase-Konfigurationsdaten)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6XsQmF0tgiP--SwRsN4Fhoyrv1c6ZUkE",
+            authDomain: "alto-logistics-alto.firebaseapp.com",
+            databaseURL: "https://alto-logistics-alto-default-rtdb.firebaseio.com",
+            projectId: "alto-logistics-alto",
+            storageBucket: "alto-logistics-alto.appspot.com",
+            messagingSenderId: "882170958574",
+            appId: "1:882170958574:web:1dbd10b23dd601202819ff",
+            measurementId: "G-ZCSRPLEQKL"
+        };
+
+        // Initialisieren der Firebase-App
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        // Überprüfen, ob ein Benutzer angemeldet ist
+        auth.onAuthStateChanged(function(user) {
+            if (user) {
+                // Benutzer ist angemeldet
+                const usernameElement = document.getElementById('username');
+                const productsTextarea = document.getElementById('products');
+
+                // Pfad zum Benutzernamen in der Datenbank
+                const userRef = ref(database, 'users/' + user.uid + '/username');
+
+                // Daten aus der Datenbank abrufen
+                get(userRef).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        usernameElement.textContent = snapshot.val();
+                    } else {
+                        console.log("Benutzername nicht gefunden");
+                    }
+                }).catch((error) => {
+                    console.error("Fehler beim Abrufen des Benutzernamens: ", error);
+                });
+
+                // Pfad zu den Produkten des Benutzers in der Datenbank
+                const userProductsRef = ref(database, 'users/' + user.uid + '/products');
+
+                // Daten aus der Datenbank abrufen und in das Textfeld einfügen
+                get(userProductsRef).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        productsTextarea.value = snapshot.val();
+                    } else {
+                        console.log("Keine Produkte gefunden");
+                    }
+                }).catch((error) => {
+                    console.error("Fehler beim Abrufen der Produkte: ", error);
+                });
+            } else {
+                // Benutzer ist nicht angemeldet, Weiterleitung zur Anmeldeseite
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+
+    <script src="popinbtn.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Event-Handler für den Button zum Öffnen des Overlays
+            document.getElementById("openPopupButton").addEventListener("click", function() {
+                // Overlay anzeigen
+                document.getElementById("overlay").style.display = "block";
+            });
+
+            // Event-Handler für den Button zum Schließen des Overlays
+            document.getElementById("closeOverlayButton1").addEventListener("click", function() {
+                // Overlay ausblenden
+                document.getElementById("overlay").style.display = "none";
+            });
+
+            // Event-Handler für den Button zum Öffnen des Overlays
+            document.getElementById("showproducts").addEventListener("click", function() {
+                // Overlay anzeigen
+                document.getElementById("overlay2").style.display = "block";
+            });
+
+            // Event-Handler für den Button zum Schließen des Overlays
+            document.getElementById("closeOverlayButton2").addEventListener("click", function() {
+                // Overlay ausblenden
+                document.getElementById("overlay2").style.display = "none";
+            });
+
+             // Event-Handler für den Button zum Öffnen des "Chat"-Popups
+        document.getElementById("chatButton").addEventListener("click", function() {
+            // Kommunikation.html in einem Popup öffnen
+            window.open('../4. Chat/kommunikation.html', 'popup', 'width=600,height=400,scrollbars=no,resizable=no');
+        });
+
+        // Event-Handler für den Button zum Schließen des "Chat"-Popups
+        document.getElementById("closeChatOverlayButton").addEventListener("click", function() {
+            document.getElementById("chatOverlay").style.display = "none";
+        });
+        });
+        
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            min-height: 100vh;
+            background: url("../1. Bilder/FullLogo_Transparent (1).png") no-repeat;
+            background-size: cover;
+            background-position: center bottom;
+            background-size: 80%;
+            background-attachment: fixed;
+            background-position-x: center;
+            background-position-y: calc(100% - 70%);
+            overflow-y: hidden; /* Vertikalen Scrollbalken für das gesamte Fenster */
+            margin: 0; /* Setzen Sie den Standardmargen auf 0 */
+            padding: 0; /* Setzen Sie das Standardpadding auf 0 */
+        }
+
+        /* CSS für die Scrollleisten */
+        ::-webkit-scrollbar {
+            width: 0;  /* Width of vertical scrollbar */
+            height: 0; /* Height of horizontal scrollbar */
+            display: none; /* Hide scrollbar */
+        }
+
+        h1 {
+            position: relative;
+            top: 20vh;
+            width: 50%;
+            z-index: 9999;
+        }
+
+        #messages {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: calc(100% - 10px); /* Breite des Fensters abzüglich des vertikalen Scrollbalkens */
+            height: calc(100% - 10px);
+            overflow-y: auto; /* Automatisches Scrollen für Nachrichten */
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #sendMsg {
+            position: absolute;
+            right: 0;
+            bottom: -20px;
+            left: 0; /* Hinzufügen von 0 links */
+            width: 100vw;
+            height: 15%;
+            max-height: 80%;
+        }
+
+        #msgTxt {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    padding-left: 10px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    resize: none;
+    overflow-y: auto;
+    
+}
+
+
+
+        #msgTxt::placeholder {
+            color: rgb(82, 82, 82); /* Graue Farbe für den Platzhalter */
+            animation: blink 1s infinite; /* Animation für das Blinken */
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0; /* Halbtransparent während der Hälfte der Zeit */
+            }
+        }
+
+        #msgBtn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100px;
+            height: 100%;
+        }
+
+        /* Nachrichten-Container anpassen */
+#messages {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: calc(100% - 20px); /* Breite des Fensters abzüglich des vertikalen Scrollbalkens */
+    height: calc(100% - 20%); /* Höhe des Fensters abzüglich der Höhe des Textfelds und des Abstands */
+    overflow-y: auto; /* Automatisches Scrollen für Nachrichten */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+        .me {
+            background: #6ba3ad;
+            color: #fff;
+            text-align: right;
+            align-self: flex-end;
+            border-radius: 10px;
+            padding: 5px 10px;
+            margin-right: 20px; /* Abstand von rechts */
+            max-width: 45%; /* Maximale Breite der Nachrichtenbox */
+            margin-left: auto; /* Starten Sie die Nachrichtenboxen von rechts */
+        }
+
+        .notMe {
+            background: #c41919;
+            color: #fff;
+            text-align: left;
+            align-self: flex-start;
+            border-radius: 10px;
+            padding: 5px 10px;
+            margin-right: 20px; /* Abstand von rechts */
+            max-width: 45%; /* Maximale Breite der Nachrichtenbox */
+            margin-right: auto; /* Starten Sie die Nachrichtenboxen von rechts */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="messages"></div>
+
+    <div id="sendMsg">
+        <textarea id="msgTxt" placeholder="Nachricht"></textarea>
+        <input type="submit" id="msgBtn" value="send" onclick="module.sendMsg()">
+    </div>
+
+    <script>
+        module = {};
+    </script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+        import { getDatabase, ref, set, remove, onChildAdded, onChildRemoved } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6XsQmF0tgiP--SwRsN4Fhoyrv1c6ZUkE",
+            authDomain: "alto-logistics-alto.firebaseapp.com",
+            databaseURL: "https://alto-logistics-products.firebaseio.com/",
+            projectId: "alto-logistics-alto",
+            storageBucket: "alto-logistics-alto.appspot.com",
+            messagingSenderId: "882170958574",
+            appId: "1:882170958574:web:1dbd10b23dd601202819ff",
+            measurementId: "G-ZCSRPLEQKL"
+        }
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        // variables
+        var msgTxt = document.getElementById('msgTxt');
+        var email;
+
+        // TO SEND MESSAGES
+        module.sendMsg = async function sendMsg() {
+            var msg = msgTxt.value.trim(); // Trim leading and trailing whitespaces
+            if (!msg) {
+                // If message is empty, do nothing
+                return;
+            }
+            var user = auth.currentUser;
+
+            if (!user) {
+                alert("Please sign in to send messages.");
+                return;
+            }
+
+            var email = user.email;
+
+            if (!email) {
+                alert("Email not found.");
+                return;
+            }
+
+            // Ersetze Punkte in der E-Mail-Adresse durch Unterstriche für den Pfad in der Datenbank
+            var dbPath = "messages/" + email.replace(".", "_");
+
+            var timestamp = new Date().getTime();
+            set(ref(db, dbPath + "/" + timestamp), {
+                msg: msg,
+                sender: email
+            })
+
+            msgTxt.value = "";
+        }
+
+      // TO RECEIVE MSG
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        var email = user.email;
+
+        // Überwachung neuer Nachrichten
+        var dbPath = "messages/" + email.replace(".", "_");
+        onChildAdded(ref(db, dbPath), (snapshot) => {
+            var data = snapshot.val();
+            var messageDiv = document.createElement("div");
+            messageDiv.className = "outer";
+            var innerDiv = document.createElement("div");
+            innerDiv.className = "inner";
+            var timestamp = parseInt(snapshot.key);
+            var date = new Date(timestamp);
+            var dateString = `${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)} ${("0" + date.getDate()).slice(-2)}/${("0" + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}`;
+            if (data.sender == email) {
+                innerDiv.className += " me";
+                innerDiv.innerHTML = `${data.msg}<br><span style="font-size: smaller; font-style: italic;">${dateString}</span>`;
+            } else {
+                innerDiv.className += " notMe";
+                innerDiv.innerHTML = `${data.msg}<br><span style="font-size: smaller; font-style: italic;">${dateString} ALTO-Logistics</span>`;
+            }
+            messageDiv.appendChild(innerDiv);
+            document.getElementById("messages").appendChild(messageDiv);
+        });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+    <!-- Popinbtn Script -->
+    <script src="/popinbtn/popinbtn.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Event-Handler für den Button zum Öffnen des Overlays
+            document.getElementById("openPopupButton").addEventListener("click", function() {
+                // Overlay anzeigen
+                document.getElementById("overlay").style.display = "block";
+            });
+
+            // Event-Handler für den Button zum Schließen des Overlays
+            document.getElementById("closeOverlayButton1").addEventListener("click", function() {
+                // Overlay ausblenden
+                document.getElementById("overlay").style.display = "none";
+            });
+
+            // Event-Handler für den Button zum Öffnen des Overlays
+            document.getElementById("showproducts").addEventListener("click", function() {
+                // Overlay anzeigen
+                document.getElementById("overlay2").style.display = "block";
+            });
+
+            // Event-Handler für den Button zum Schließen des Overlays
+            document.getElementById("closeOverlayButton2").addEventListener("click", function() {
+                // Overlay ausblenden
+                document.getElementById("overlay2").style.display = "none";
+            });
+
+            // Event-Handler für den Button zum Öffnen des "Chat"-Popups
+            document.getElementById("chatButton").addEventListener("click", function() {
+                // Kommunikation.html in einem Popup öffnen
+                window.open("kommunikation.html", 'popup', 'width=600,height=400,scrollbars=no,resizable=no');
+            });
+
+            // Event-Handler für den Button zum Schließen des "Chat"-Popups
+            document.getElementById("closeChatOverlayButton").addEventListener("click", function() {
+                document.getElementById("chatOverlay").style.display = "none";
+            });
+        });
+    </script>
+</body>
+
+</html>
